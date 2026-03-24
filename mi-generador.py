@@ -31,7 +31,7 @@ def write_docker_clients():
             "entrypoint": "/client",
             "environment": [
                 "CLI_ID=" + str(num),
-                "CLI_LOG_LEVEL=DEBUG"
+                "CLI_LOG_LEVEL"
             ],
             "networks": [
                 "testing_net"
