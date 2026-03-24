@@ -38,7 +38,7 @@ def write_docker_clients():
             ],
             "depends_on": [
                 "server"
-            ]
+            ],
             "volumes": [
                 "./client/config.yaml:/config.yaml"
             ]
