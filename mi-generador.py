@@ -39,6 +39,9 @@ def write_docker_clients():
             "depends_on": [
                 "server"
             ]
+            "volumes": [
+                "./client/config.yaml:/config.yaml"
+            ]
         }
         services["client" + str(num)] = new_client
     data["services"] = services
