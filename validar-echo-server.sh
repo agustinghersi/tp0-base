@@ -1,4 +1,4 @@
-response=$(echo "hola" | nc server 12345)
+response=$(docker compose exec -T client sh -c 'echo "hola" | nc server 12345')
 
 echo "Response: [$response]"
 if [ "$response" == "hola" ]; then
