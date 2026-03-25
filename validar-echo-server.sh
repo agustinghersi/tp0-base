@@ -1,4 +1,4 @@
-response=$(echo "Hola" | docker run --rm --network=tp0_testing_net subfuzion/netcat server 12345)
+response=$(echo "Hola" | docker run --rm -i --network=tp0_testing_net subfuzion/netcat -w 2 server 12345)
 
 echo "Response: [$response]"
 if [ "$response" == "hola" ]; then
