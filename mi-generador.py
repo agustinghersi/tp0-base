@@ -29,6 +29,7 @@ def write_docker_clients():
         services["client" + str(num)] = new_client
     if services.length == 0:
         client = create_new_client(1)
+        services["client1"] = client
     data["services"] = services
     with open(docker_file, "w") as f:
         yaml.dump(data, f)
