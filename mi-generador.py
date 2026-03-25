@@ -27,7 +27,7 @@ def write_docker_clients():
     for num in range(1, int(clients) + 1):
         new_client = create_new_client(num)
         services["client" + str(num)] = new_client
-    if services.length == 0:
+    if len(services) == 0:
         client = create_new_client(1)
         services["client1"] = client
     data["services"] = services
