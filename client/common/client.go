@@ -82,7 +82,13 @@ func (c *Client) StartClientLoop() {
 		)
 
 		// Wait a time between sending one message and the next one
-		time.Sleep(c.config.LoopPeriod)
+		//time.Sleep(c.config.LoopPeriod)
+		// Esto es mayor al segundo establecido en el comando con -t del compose down.
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(c.config.LoopPeriod):
+		}
 
 	}
 	log.Infof("action: loop_finished | result: success | client_id: %v", c.config.ID)
