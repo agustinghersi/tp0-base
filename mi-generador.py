@@ -25,27 +25,32 @@ def write_docker_clients():
         data = yaml.safe_load(f)
     services = data.get("services", {})
     for num in range(1, int(clients) + 1):
-        new_client = {
-            "container_name": "client" + str(num),
-            "image": "client:latest",
-            "entrypoint": "/client",
-            "environment": [
-                "CLI_ID=" + str(num),
-                "CLI_LOG_LEVEL"
-            ],
-            "networks": [
-                "testing_net"
-            ],
-            "depends_on": [
-                "server"
-            ],
-            "volumes": [
-                "./client/config.yaml:/config.yaml"
-            ]
-        }
+        new_client = create_new_client(num)
         services["client" + str(num)] = new_client
+    if services.length == 0:
+        client = create_new_client(1)
     data["services"] = services
     with open(docker_file, "w") as f:
         yaml.dump(data, f)
 
+def create_new_client(num):
+    new_client = {
+        "container_name": "client" + str(num),
+        "image": "client:latest",
+        "entrypoint": "/client",
+        "environment": [
+            "CLI_ID=" + str(num),
+            "CLI_LOG_LEVEL"
+        ],
+        "networks": [
+            "testing_net"
+        ],
+        "depends_on": [
+            "server"
+        ],
+        "volumes": [
+            "./client/config.yaml:/config.yaml"
+        ]
+    }
+    return new_client
 main()
